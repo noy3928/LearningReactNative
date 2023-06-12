@@ -67,4 +67,55 @@ export default App
 
 - navigate나 push 함수의 두 번째 인자로 객체를 넘겨줄 수 있다. 이 객체는 다음 경로로 전달된다.
 - 중첩된 네비게이터가 있다면, 해당 중첩된 네비게이터의 경우에는 다른 방식으로 params를 전달해주어야 한다. [link](https://reactnavigation.org/docs/params#passing-params-to-nested-navigators)
--
+
+<br>
+
+### Configuring the header bar
+
+- Screen 컴포넌트의 options 속성을 통해서 헤더를 커스텀할 수 있다.
+
+```js
+<Stack.Screen
+  name="Home"
+  component={HomeScreen}
+  options={{
+    title: "My home",
+    headerStyle: {
+      backgroundColor: "#f4511e",
+    },
+    headerTintColor: "#fff",
+    headerTitleStyle: {
+      fontWeight: "bold",
+    },
+  }}
+/>
+```
+
+- setOptions 메서드를 통해서도 헤더를 커스텀할 수 있다.
+- 전체 헤더를 커스텀하고 싶다면, Stack.Navigator의 screenOptions 속성을 통해서 커스텀할 수 있다.
+
+```js
+<Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+```
+
+- 커스텀 컴포넌트를 사용하고 싶다면, 옵션에 headerTitle을 사용하면 된다.
+
+```js
+<Stack.Navigator>
+  <Stack.Screen
+    name="Home"
+    component={HomeScreen}
+    options={{ headerTitle: props => <LogoTitle {...props} /> }}
+  />
+</Stack.Navigator>
+```
