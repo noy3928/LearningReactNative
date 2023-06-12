@@ -119,3 +119,42 @@ export default App
   />
 </Stack.Navigator>
 ```
+
+<br>
+
+### Header buttons
+
+- header에 있는 컴포넌트와 screen에 있는 컴포넌트와 상호작용하고 싶다면, setOptions을 사용하면 된다.
+
+```js
+function StackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={({ navigation, route }) => ({
+          headerTitle: props => <LogoTitle {...props} />,
+          headerRight: () => <Button title="Update count" />,
+        })}
+      />
+    </Stack.Navigator>
+  )
+}
+
+function HomeScreen({ navigation }) {
+  const [count, setCount] = React.useState(0)
+
+  React.useEffect(() => {
+    // Use `setOptions` to update the button that we previously specified
+    // Now the button includes an `onPress` handler to update the count
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+      ),
+    })
+  }, [navigation])
+
+  return <Text>Count: {count}</Text>
+}
+```
