@@ -9,54 +9,32 @@ import {
   Keyboard,
 } from "react-native"
 import Task from "./components/Task"
+import { NavigationContainer } from "@react-navigation/native"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import TodoPage from "./pages/todos"
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Home Screen</Text>
+    </View>
+  )
+}
+
+const Stack = createNativeStackNavigator()
 
 export default function App() {
-  const [task, setTask] = useState()
-  const [taskItems, setTaskItems] = useState([])
-
-  const handleAddTask = () => {
-    Keyboard.dismiss()
-    setTaskItems([...taskItems, task])
-    setTask(null)
-  }
-
-  const completeTask = index => {
-    let itemsCopy = [...taskItems]
-    itemsCopy.splice(index, 1)
-    setTaskItems(itemsCopy)
-  }
-
   return (
-    <View style={styles.container}>
-      <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}>오늘의 할 일</Text>
-        <View style={styles.items}>
-          {taskItems.map((item, index) => {
-            return (
-              <TouchableOpacity key={index} text={item}>
-                <Task text={item} />
-              </TouchableOpacity>
-            )
-          })}
-        </View>
-      </View>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.writeTaskWrapper}
-      >
-        <TextInput
-          style={styles.input}
-          placeholder={"Write a task"}
-          value={task}
-          onChangeText={text => setTask(text)}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={TodoPage}
+          options={{ title: "할일 페이지" }}
         />
-        <TouchableOpacity onPress={() => handleAddTask()}>
-          <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
-          </View>
-        </TouchableOpacity>
-      </KeyboardAvoidingView>
-    </View>
+        <Stack.Screen name="Details" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 
