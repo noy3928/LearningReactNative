@@ -1,22 +1,18 @@
 import React, { useState } from "react"
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Keyboard,
-} from "react-native"
+import { StyleSheet, Text, Button, View } from "react-native"
 import Task from "./components/Task"
 import { NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import TodoPage from "./pages/todos"
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Text>Home Screen</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate("Details")}
+      />
     </View>
   )
 }
@@ -29,10 +25,10 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
-          component={TodoPage}
+          component={HomeScreen}
           options={{ title: "할일 페이지" }}
         />
-        <Stack.Screen name="Details" component={HomeScreen} />
+        <Stack.Screen name="Details" component={TodoPage} />
       </Stack.Navigator>
     </NavigationContainer>
   )
