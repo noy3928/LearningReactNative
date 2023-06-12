@@ -62,3 +62,9 @@ export default App
 
 - navigate는 너가 원하는 경로로 이동해주는 것이다. 근데 이미 그 경로에 있으면 더 이상 이동 안한다. 즉, navigate를 이용해서 현재 보고 있는 화면으로 가려고 하면 아무 일도 안 일어나는 것이다. 주로 사용자가 앱 내에서 특정 위치로 가게 할 때 이 함수를 쓰면 좋다.
 - 한편 push는 항상 새로운 화면을 스택에 추가한다. 이미 그 경로를 방문했다 해도, push를 호출하면 지정한 경로의 새 인스턴스가 스택에 추가되는 것이다. 사용자가 앱의 동일한 경로를 여러 번 가고 싶을 때 이 함수를 사용한다.
+
+### Passing parameters to routes
+
+- navigate나 push 함수의 두 번째 인자로 객체를 넘겨줄 수 있다. 이 객체는 다음 경로로 전달된다.
+- 중첩된 네비게이터가 있다면, 해당 중첩된 네비게이터의 경우에는 다른 방식으로 params를 전달해주어야 한다. [link](https://reactnavigation.org/docs/params#passing-params-to-nested-navigators)
+-

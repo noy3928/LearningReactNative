@@ -7,12 +7,14 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Keyboard,
+  Button,
 } from "react-native"
 import Task from "../../components/Task"
 
-export default function TodoPage() {
+export default function TodoPage({ route, navigation }) {
   const [task, setTask] = useState()
   const [taskItems, setTaskItems] = useState([])
+  const { itemId, otherParam } = route.params
 
   const handleAddTask = () => {
     Keyboard.dismiss()
@@ -29,7 +31,10 @@ export default function TodoPage() {
   return (
     <View style={styles.container}>
       <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}>오늘의 할 일</Text>
+        <Text style={styles.sectionTitle}>
+          {otherParam}
+          {itemId}
+        </Text>
         <View style={styles.items}>
           {taskItems.map((item, index) => {
             return (
